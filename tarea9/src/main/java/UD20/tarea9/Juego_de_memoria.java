@@ -38,8 +38,9 @@ public class Juego_de_memoria extends JFrame {
 																				// son
 				// Del mismo tipo, en caso de mas tipos de botones, se crearían mas actions
 
-				if (primerBoton == null) {
-					primerBoton = boton;
+				if (primerBoton == null) {// si no hay ningún boton "clicado"
+					primerBoton = boton;// el boton que clicamos, lo consideramos como primer boton
+
 				} else {
 					// comprobar colores
 				}
