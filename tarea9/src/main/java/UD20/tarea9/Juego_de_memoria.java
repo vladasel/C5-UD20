@@ -46,7 +46,7 @@ public class Juego_de_memoria extends JFrame {
 					// comprobar colores
 					if (primerBoton.getBackground() == boton.getBackground()) {
 
-						primerBoton.setBackground(Color.red);
+						primerBoton.setBackground(Color.black);
 						boton.setBackground(Color.black);
 					} else {
 						primerBoton = null;
