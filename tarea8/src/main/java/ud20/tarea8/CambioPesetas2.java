@@ -1,4 +1,4 @@
-package ud20.tarea7;
+package ud20.tarea8;
 
 import java.awt.EventQueue;
 
@@ -6,14 +6,18 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 @SuppressWarnings("serial")
-public class CambioPesetas extends JFrame {
+public class CambioPesetas2 extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtCantidad;
@@ -30,7 +34,7 @@ public class CambioPesetas extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					CambioPesetas frame = new CambioPesetas();
+					CambioPesetas2 frame = new CambioPesetas2();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -42,7 +46,7 @@ public class CambioPesetas extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CambioPesetas() {
+	public CambioPesetas2() {
 		cambioAPtas = true;
 		
 		setTitle("Calculadora cambio de monedas");
@@ -60,6 +64,14 @@ public class CambioPesetas extends JFrame {
 		contentPane.add(lblCantidad);
 		
 		txtCantidad = new JTextField();
+		txtCantidad.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent e) {
+				if(comprovarEntrada(txtCantidad.getText())) {
+					JOptionPane.showMessageDialog(null, "Error");
+				}
+			}
+		});
 		txtCantidad.setBounds(161, 15, 96, 19);
 		contentPane.add(txtCantidad);
 		txtCantidad.setColumns(10);
@@ -88,7 +100,7 @@ public class CambioPesetas extends JFrame {
 			}
 		});
 		btnEurPta.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnEurPta.setBounds(91, 46, 105, 26);
+		btnEurPta.setBounds(75, 46, 105, 26);
 		contentPane.add(btnEurPta);
 		
 		JButton btnCambiar = new JButton("Cambiar");
@@ -105,7 +117,31 @@ public class CambioPesetas extends JFrame {
 			}
 		});
 		btnCambiar.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnCambiar.setBounds(233, 46, 105, 26);
+		btnCambiar.setBounds(190, 46, 105, 26);
 		contentPane.add(btnCambiar);
+		
+		JButton btnBorrar = new JButton("Borrar");
+		btnBorrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				txtCantidad.setText("");
+				txtResultado.setText("");
+			}
+		});
+		btnBorrar.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnBorrar.setBounds(305, 46, 86, 26);
+		contentPane.add(btnBorrar);
+	}
+	
+	private boolean comprovarEntrada (String texto) {
+		String charsAceptados = "1234567890.";
+		
+		for ( char letra : texto.toCharArray() ) {
+			if ( !charsAceptados.contains(Character.toString(letra)) ) {
+				return false;
+			}
+		}
+		
+		return true;
+		
 	}
 }
