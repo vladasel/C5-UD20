@@ -72,6 +72,7 @@ public class IndiceMasaCorporal extends JFrame {
 				peso = Double.parseDouble(txtPeso.getText());
 				
 				resultado = Double.toString(altura * altura / peso);
+				resultado = resultado.substring(0, resultado.indexOf(".")+4);		//Dejar solo 3 decimales
 				txtResultado.setText(resultado);
 			}
 		});
