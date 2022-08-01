@@ -1,8 +1,6 @@
 package UD20.tarea9;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -13,7 +11,6 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JToggleButton;
-import java.awt.Color;
 
 public class Juego_de_memoria extends JFrame {
 
@@ -33,42 +30,7 @@ public class Juego_de_memoria extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new GridLayout(4, 4, 0, 0));
 		
-		crearArrayColores();
-
-		//crear acccion
-		ActionListener actList = new ActionListener() {
-			public void actionPerformed(ActionEvent clickBoton) {
-				//mostrar color boton1 y boton2
-				//comparar colores --> si son iguales, desactivar botones
-								//--> si son diferentes, volver a situcion inicial (esconder color i getsource limpio)
-				//solo se puedan girar cartas de 2 en 2
-				//
-				
-				
-				// objeto tipo toggleButon, se utiliza para sacar el botón que a lanzado el
-				// action
-				JToggleButton boton = (JToggleButton) clickBoton.getSource();// funciona bien solo si todos los botones
-																				// son
-				// Del mismo tipo, en caso de mas tipos de botones, se crearían mas actions
-
-				if (primerBoton == null) {// si no hay ningún boton "clicado"
-					primerBoton = boton;// el boton que clicamos, lo consideramos como primer boton
-				} else {
-					// comprobar colores
-					if (primerBoton.getBackground() == boton.getBackground()) {
-						primerBoton.setEnabled(false);
-						boton.setEnabled(false);
-						primerBoton.setBackground(Color.black);
-						boton.setBackground(Color.black);
-					} else {
-						primerBoton.setSelected(true);
-						boton.setSelected(true);
-						
-					}
-					primerBoton = null;
-				}
-			}
-		};
+		crearArrayColores();		
 
 		// Crear array de togglebuttons
 		arrayBotones = new JToggleButton[16];
@@ -82,6 +44,36 @@ public class Juego_de_memoria extends JFrame {
 		}
 
 	}
+	
+	//crear acccion
+	ActionListener actList = new ActionListener() {
+		public void actionPerformed(ActionEvent clickBoton) {
+			//comparar colores --> si son iguales, desactivar botones
+							//--> si son diferentes, volver a situacion inicial			
+			
+			// objeto tipo toggleButon, se utiliza para sacar el botón que ha lanzado el action
+			JToggleButton boton = (JToggleButton) clickBoton.getSource();// funciona bien solo si todos los botones son
+															// del mismo tipo, en caso de mas tipos de botones, se crearían mas actions
+			
+			
+			if (primerBoton == null) {// si no hay ningún boton "clicado"
+				primerBoton = boton;// el boton que clicamos, lo consideramos como primer boton				
+			} else {				
+				//comprobar primero que no sea el mismo boton para que no se anule a si mismo
+				if(boton!=primerBoton) {
+					// comprobar colores
+					if (primerBoton.getBackground().equals(boton.getBackground())) {
+						primerBoton.setEnabled(false);
+						boton.setEnabled(false);
+					} else {
+						primerBoton.setSelected(true);
+						boton.setSelected(true);						
+					}
+					primerBoton = null;					
+				}				
+			}
+		}
+	};
 	
 	private void colorearBoton(JToggleButton boton) {
 		int num;
