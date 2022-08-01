@@ -73,7 +73,21 @@ public class IndiceMasaCorporal extends JFrame {
 				
 				resultado = Double.toString(peso / (altura * altura));
 				resultado = cortarDecimales(resultado, 2);
-				txtResultado.setText(resultado);
+				txtResultado.setText(resultado);				
+				
+				/*PROPUESTA
+				 
+				double resultado;
+				double altura, peso;
+				
+				altura = Double.parseDouble(txtAltura.getText());
+				peso = Double.parseDouble(txtPeso.getText());
+				
+				resultado = peso / (altura * altura);
+				
+				txtResultado.setText(String.format("%.2f", resultado));
+				
+				*/
 			}
 		});
 		btnCalcular.setFont(new Font("Tahoma", Font.PLAIN, 12));
