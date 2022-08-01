@@ -1,7 +1,5 @@
 package ud20.tarea8;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -13,8 +11,6 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 
 @SuppressWarnings("serial")
 public class CambioPesetas2 extends JFrame {
@@ -27,21 +23,6 @@ public class CambioPesetas2 extends JFrame {
 	private static final double CAMBIO_EURO_PTAS = 166.386;
 	private static final double CAMBIO_PTAS_EURO = 0.00601;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CambioPesetas2 frame = new CambioPesetas2();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
@@ -64,14 +45,6 @@ public class CambioPesetas2 extends JFrame {
 		contentPane.add(lblCantidad);
 		
 		txtCantidad = new JTextField();
-		txtCantidad.addFocusListener(new FocusAdapter() {
-			@Override
-			public void focusLost(FocusEvent e) {
-				if(comprovarEntrada(txtCantidad.getText())) {
-					JOptionPane.showMessageDialog(null, "Error");
-				}
-			}
-		});
 		txtCantidad.setBounds(161, 15, 96, 19);
 		contentPane.add(txtCantidad);
 		txtCantidad.setColumns(10);
@@ -90,6 +63,7 @@ public class CambioPesetas2 extends JFrame {
 		final JButton btnEurPta = new JButton("Euros a ptas");
 		btnEurPta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				if(cambioAPtas) {
 					cambioAPtas = false;
 					btnEurPta.setText("Ptas a euros");
@@ -106,14 +80,23 @@ public class CambioPesetas2 extends JFrame {
 		JButton btnCambiar = new JButton("Cambiar");
 		btnCambiar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String resultado;
-				if(cambioAPtas) {
-					resultado = Double.toString(Double.parseDouble(txtCantidad.getText())*CAMBIO_EURO_PTAS);
+				
+				if( entradaCorrecta(txtCantidad.getText()) ) {
+					
+					String resultado;
+					if(cambioAPtas) {
+						resultado = Double.toString(Double.parseDouble(txtCantidad.getText())*CAMBIO_EURO_PTAS);
+					} else {
+						resultado = Double.toString(Double.parseDouble(txtCantidad.getText())*CAMBIO_PTAS_EURO);
+					}
+					resultado = resultado.substring(0, resultado.indexOf(".")+4);		//Dejar solo 3 decimales
+					txtResultado.setText(resultado);
+					
 				} else {
-					resultado = Double.toString(Double.parseDouble(txtCantidad.getText())*CAMBIO_PTAS_EURO);
+					JOptionPane.showMessageDialog(CambioPesetas2.this, "Error: Introducir solo caracteres validos.");
+					return;
 				}
-				resultado = resultado.substring(0, resultado.indexOf(".")+4);
-				txtResultado.setText(resultado);
+				
 			}
 		});
 		btnCambiar.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -132,11 +115,18 @@ public class CambioPesetas2 extends JFrame {
 		contentPane.add(btnBorrar);
 	}
 	
-	private boolean comprovarEntrada (String texto) {
+	private boolean entradaCorrecta (String texto) {
 		String charsAceptados = "1234567890.";
+		int numPuntos = 0;
 		
 		for ( char letra : texto.toCharArray() ) {
 			if ( !charsAceptados.contains(Character.toString(letra)) ) {
+				return false;
+			}
+			if (letra == '.') {
+				numPuntos++;
+			}
+			if (numPuntos > 1) {
 				return false;
 			}
 		}

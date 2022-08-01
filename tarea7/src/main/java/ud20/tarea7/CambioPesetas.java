@@ -1,7 +1,5 @@
 package ud20.tarea7;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -23,21 +21,6 @@ public class CambioPesetas extends JFrame {
 	private static final double CAMBIO_EURO_PTAS = 166.386;
 	private static final double CAMBIO_PTAS_EURO = 0.00601;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CambioPesetas frame = new CambioPesetas();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
