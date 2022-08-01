@@ -71,7 +71,7 @@ public class IndiceMasaCorporal extends JFrame {
 				altura = Double.parseDouble(txtAltura.getText());
 				peso = Double.parseDouble(txtPeso.getText());
 				
-				resultado = Double.toString(peso * altura / peso);
+				resultado = Double.toString(altura * altura / peso);
 				txtResultado.setText(resultado);
 			}
 		});
