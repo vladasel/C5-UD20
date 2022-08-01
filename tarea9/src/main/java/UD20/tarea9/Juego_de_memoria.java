@@ -18,7 +18,7 @@ import java.awt.Color;
 public class Juego_de_memoria extends JFrame {
 
 	private JPanel contentPane;
-	JToggleButton primerBoton = null;
+	JToggleButton primerBoton;
 	JToggleButton[] arrayBotones;
 	private ArrayList<Color> coloresIniciales;
 
@@ -35,9 +35,16 @@ public class Juego_de_memoria extends JFrame {
 		
 		crearArrayColores();
 
-		// crear acccion
+		//crear acccion
 		ActionListener actList = new ActionListener() {
 			public void actionPerformed(ActionEvent clickBoton) {
+				//mostrar color boton1 y boton2
+				//comparar colores --> si son iguales, desactivar botones
+								//--> si son diferentes, volver a situcion inicial (esconder color i getsource limpio)
+				//solo se puedan girar cartas de 2 en 2
+				//
+				
+				
 				// objeto tipo toggleButon, se utiliza para sacar el botón que a lanzado el
 				// action
 				JToggleButton boton = (JToggleButton) clickBoton.getSource();// funciona bien solo si todos los botones
@@ -46,16 +53,19 @@ public class Juego_de_memoria extends JFrame {
 
 				if (primerBoton == null) {// si no hay ningún boton "clicado"
 					primerBoton = boton;// el boton que clicamos, lo consideramos como primer boton
-
 				} else {
 					// comprobar colores
 					if (primerBoton.getBackground() == boton.getBackground()) {
-
+						primerBoton.setEnabled(false);
+						boton.setEnabled(false);
 						primerBoton.setBackground(Color.black);
 						boton.setBackground(Color.black);
 					} else {
-						primerBoton = null;
+						primerBoton.setSelected(true);
+						boton.setSelected(true);
+						
 					}
+					primerBoton = null;
 				}
 			}
 		};
@@ -68,6 +78,7 @@ public class Juego_de_memoria extends JFrame {
 			colorearBoton(arrayBotones[i]);
 			arrayBotones[i].setSelected(true);
 			contentPane.add(arrayBotones[i]);
+			arrayBotones[i].addActionListener(actList);
 		}
 
 	}
