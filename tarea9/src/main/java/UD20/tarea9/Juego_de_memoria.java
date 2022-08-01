@@ -1,6 +1,7 @@
 package UD20.tarea9;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -43,10 +44,18 @@ public class Juego_de_memoria extends JFrame {
 																				// son
 				// Del mismo tipo, en caso de mas tipos de botones, se crearían mas actions
 
-				if (primerBoton == null) {
-					primerBoton = boton;
+				if (primerBoton == null) {// si no hay ningún boton "clicado"
+					primerBoton = boton;// el boton que clicamos, lo consideramos como primer boton
+
 				} else {
 					// comprobar colores
+					if (primerBoton.getBackground() == boton.getBackground()) {
+
+						primerBoton.setBackground(Color.black);
+						boton.setBackground(Color.black);
+					} else {
+						primerBoton = null;
+					}
 				}
 			}
 		};
