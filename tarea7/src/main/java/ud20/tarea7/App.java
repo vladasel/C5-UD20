@@ -1,13 +1,20 @@
 package ud20.tarea7;
 
-/**
- * Hello world!
- *
- */
+import java.awt.EventQueue;
+
 public class App 
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+    	EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					CambioPesetas frame = new CambioPesetas();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
     }
 }
