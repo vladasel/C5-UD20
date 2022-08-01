@@ -10,14 +10,17 @@ import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JToggleButton;
+import java.awt.Color;
 
 public class Juego_de_memoria extends JFrame {
 
 	private JPanel contentPane;
 	JToggleButton primerBoton = null;
 	JToggleButton[] arrayBotones;
+	private ArrayList<Color> coloresIniciales;
 
 	/**
 	 * Create the frame.
@@ -29,6 +32,8 @@ public class Juego_de_memoria extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new GridLayout(4, 4, 0, 0));
+		
+		crearArrayColores();
 
 		// crear acccion
 		ActionListener actList = new ActionListener() {
@@ -60,8 +65,39 @@ public class Juego_de_memoria extends JFrame {
 		// rellenar el array
 		for (int i = 0; i < arrayBotones.length; i++) {
 			arrayBotones[i] = new JToggleButton(Integer.toString(i + 1));
+			colorearBoton(arrayBotones[i]);
+			arrayBotones[i].setSelected(true);
 			contentPane.add(arrayBotones[i]);
 		}
 
 	}
+	
+	private void colorearBoton(JToggleButton boton) {
+		int num;
+		
+		num = (int)(Math.random()*(coloresIniciales.size()));
+		boton.setBackground(coloresIniciales.get(num));
+		coloresIniciales.remove(num);
+	}
+	
+	private void crearArrayColores() {
+		coloresIniciales = new ArrayList<Color>();
+		coloresIniciales.add(Color.CYAN);
+		coloresIniciales.add(Color.CYAN);
+		coloresIniciales.add(Color.BLUE);
+		coloresIniciales.add(Color.BLUE);
+		coloresIniciales.add(Color.GREEN);
+		coloresIniciales.add(Color.GREEN);
+		coloresIniciales.add(Color.MAGENTA);
+		coloresIniciales.add(Color.MAGENTA);
+		coloresIniciales.add(Color.ORANGE);
+		coloresIniciales.add(Color.ORANGE);
+		coloresIniciales.add(Color.RED);
+		coloresIniciales.add(Color.RED);
+		coloresIniciales.add(Color.YELLOW);
+		coloresIniciales.add(Color.YELLOW);
+		coloresIniciales.add(Color.PINK);
+		coloresIniciales.add(Color.PINK);
+	}
+	
 }
