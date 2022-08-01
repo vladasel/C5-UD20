@@ -1,9 +1,11 @@
-package ud20.tarea7;
+package ud20.tarea8;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -11,7 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
-public class CambioPesetas extends JFrame {
+public class CambioPesetas2 extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtCantidad;
@@ -25,7 +27,7 @@ public class CambioPesetas extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public CambioPesetas() {
+	public CambioPesetas2() {
 		cambioAPtas = true;
 		
 		setTitle("Calculadora cambio de monedas");
@@ -61,6 +63,7 @@ public class CambioPesetas extends JFrame {
 		final JButton btnEurPta = new JButton("Euros a ptas");
 		btnEurPta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				if(cambioAPtas) {
 					cambioAPtas = false;
 					btnEurPta.setText("Ptas a euros");
@@ -71,24 +74,64 @@ public class CambioPesetas extends JFrame {
 			}
 		});
 		btnEurPta.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnEurPta.setBounds(91, 46, 105, 26);
+		btnEurPta.setBounds(75, 46, 105, 26);
 		contentPane.add(btnEurPta);
 		
 		JButton btnCambiar = new JButton("Cambiar");
 		btnCambiar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String resultado;
-				if(cambioAPtas) {
-					resultado = Double.toString(Double.parseDouble(txtCantidad.getText())*CAMBIO_EURO_PTAS);
+				
+				if( entradaCorrecta(txtCantidad.getText()) ) {
+					
+					String resultado;
+					if(cambioAPtas) {
+						resultado = Double.toString(Double.parseDouble(txtCantidad.getText())*CAMBIO_EURO_PTAS);
+					} else {
+						resultado = Double.toString(Double.parseDouble(txtCantidad.getText())*CAMBIO_PTAS_EURO);
+					}
+					resultado = resultado.substring(0, resultado.indexOf(".")+4);		//Dejar solo 3 decimales
+					txtResultado.setText(resultado);
+					
 				} else {
-					resultado = Double.toString(Double.parseDouble(txtCantidad.getText())*CAMBIO_PTAS_EURO);
+					JOptionPane.showMessageDialog(CambioPesetas2.this, "Error: Introducir solo caracteres validos.");
+					return;
 				}
-				resultado = resultado.substring(0, resultado.indexOf(".")+4);
-				txtResultado.setText(resultado);
+				
 			}
 		});
 		btnCambiar.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnCambiar.setBounds(233, 46, 105, 26);
+		btnCambiar.setBounds(190, 46, 105, 26);
 		contentPane.add(btnCambiar);
+		
+		JButton btnBorrar = new JButton("Borrar");
+		btnBorrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				txtCantidad.setText("");
+				txtResultado.setText("");
+			}
+		});
+		btnBorrar.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnBorrar.setBounds(305, 46, 86, 26);
+		contentPane.add(btnBorrar);
+	}
+	
+	private boolean entradaCorrecta (String texto) {
+		String charsAceptados = "1234567890.";
+		int numPuntos = 0;
+		
+		for ( char letra : texto.toCharArray() ) {
+			if ( !charsAceptados.contains(Character.toString(letra)) ) {
+				return false;
+			}
+			if (letra == '.') {
+				numPuntos++;
+			}
+			if (numPuntos > 1) {
+				return false;
+			}
+		}
+		
+		return true;
+		
 	}
 }
