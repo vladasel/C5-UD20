@@ -89,7 +89,8 @@ public class CambioPesetas2 extends JFrame {
 					} else {
 						resultado = Double.toString(Double.parseDouble(txtCantidad.getText())*CAMBIO_PTAS_EURO);
 					}
-					resultado = resultado.substring(0, resultado.indexOf(".")+4);		//Dejar solo 3 decimales
+
+					resultado = cortarDecimales(resultado, 3);		//Dejar solo 3 decimales
 					txtResultado.setText(resultado);
 					
 				} else {
@@ -133,5 +134,12 @@ public class CambioPesetas2 extends JFrame {
 		
 		return true;
 		
+	}
+	
+	private String cortarDecimales(String numero, int decimales) {
+		if(numero.length() > numero.indexOf(".")+decimales+1) {
+			numero = numero.substring(0, numero.indexOf(".")+decimales+1);
+		}
+		return numero;
 	}
 }

@@ -71,14 +71,21 @@ public class IndiceMasaCorporal extends JFrame {
 				altura = Double.parseDouble(txtAltura.getText());
 				peso = Double.parseDouble(txtPeso.getText());
 				
-				resultado = Double.toString(altura * altura / peso);
-				resultado = resultado.substring(0, resultado.indexOf(".")+4);		//Dejar solo 3 decimales
+				resultado = Double.toString(peso / (altura * altura));
+				resultado = cortarDecimales(resultado, 2);
 				txtResultado.setText(resultado);
 			}
 		});
 		btnCalcular.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnCalcular.setBounds(131, 76, 105, 27);
 		contentPane.add(btnCalcular);
+	}
+	
+	private String cortarDecimales(String numero, int decimales) {
+		if(numero.length() > numero.indexOf(".")+decimales+1) {
+			numero = numero.substring(0, numero.indexOf(".")+decimales+1);
+		}
+		return numero;
 	}
 
 }

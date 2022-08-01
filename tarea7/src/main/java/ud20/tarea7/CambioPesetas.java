@@ -83,12 +83,19 @@ public class CambioPesetas extends JFrame {
 				} else {
 					resultado = Double.toString(Double.parseDouble(txtCantidad.getText())*CAMBIO_PTAS_EURO);
 				}
-				resultado = resultado.substring(0, resultado.indexOf(".")+4);
+				resultado = cortarDecimales(resultado, 3);
 				txtResultado.setText(resultado);
 			}
 		});
 		btnCambiar.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnCambiar.setBounds(233, 46, 105, 26);
 		contentPane.add(btnCambiar);
+	}
+	
+	private String cortarDecimales(String numero, int decimales) {
+		if(numero.length() > numero.indexOf(".")+decimales+1) {
+			numero = numero.substring(0, numero.indexOf(".")+decimales+1);
+		}
+		return numero;
 	}
 }
