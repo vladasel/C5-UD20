@@ -65,18 +65,7 @@ public class IndiceMasaCorporal extends JFrame {
 		JButton btnCalcular = new JButton("Calcular IMC");
 		btnCalcular.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String resultado = "";
-				double altura, peso;
-				
-				altura = Double.parseDouble(txtAltura.getText());
-				peso = Double.parseDouble(txtPeso.getText());
-				
-				resultado = Double.toString(peso / (altura * altura));
-				resultado = cortarDecimales(resultado, 2);
-				txtResultado.setText(resultado);				
-				
-				/*PROPUESTA
-				 
+								 
 				double resultado;
 				double altura, peso;
 				
@@ -87,7 +76,6 @@ public class IndiceMasaCorporal extends JFrame {
 				
 				txtResultado.setText(String.format("%.2f", resultado));
 				
-				*/
 			}
 		});
 		btnCalcular.setFont(new Font("Tahoma", Font.PLAIN, 12));
@@ -95,11 +83,4 @@ public class IndiceMasaCorporal extends JFrame {
 		contentPane.add(btnCalcular);
 	}
 	
-	private String cortarDecimales(String numero, int decimales) {
-		if(numero.length() > numero.indexOf(".")+decimales+1) {
-			numero = numero.substring(0, numero.indexOf(".")+decimales+1);
-		}
-		return numero;
-	}
-
 }
