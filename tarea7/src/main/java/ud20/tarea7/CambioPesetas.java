@@ -77,25 +77,18 @@ public class CambioPesetas extends JFrame {
 		JButton btnCambiar = new JButton("Cambiar");
 		btnCambiar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String resultado;
+				Double resultado;
 				if(cambioAPtas) {
-					resultado = Double.toString(Double.parseDouble(txtCantidad.getText())*CAMBIO_EURO_PTAS);
+					resultado = Double.parseDouble(txtCantidad.getText())*CAMBIO_EURO_PTAS;
 				} else {
-					resultado = Double.toString(Double.parseDouble(txtCantidad.getText())*CAMBIO_PTAS_EURO);
-				}
-				resultado = cortarDecimales(resultado, 3);
-				txtResultado.setText(resultado);
+					resultado = Double.parseDouble(txtCantidad.getText())*CAMBIO_PTAS_EURO;
+				}							
+				txtResultado.setText(String.format("%.3f", resultado));
 			}
 		});
 		btnCambiar.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		btnCambiar.setBounds(233, 46, 105, 26);
 		contentPane.add(btnCambiar);
 	}
-	
-	private String cortarDecimales(String numero, int decimales) {
-		if(numero.length() > numero.indexOf(".")+decimales+1) {
-			numero = numero.substring(0, numero.indexOf(".")+decimales+1);
-		}
-		return numero;
-	}
+
 }
