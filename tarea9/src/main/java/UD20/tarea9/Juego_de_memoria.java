@@ -136,6 +136,7 @@ public class Juego_de_memoria extends JFrame {
 
 		num = (int) (Math.random() * (fotosIniciales.size()));
 		boton.setIcon(new ImageIcon(fotosIniciales.get(num)));
+		boton.setName(fotosIniciales.get(num).toString());
 		fotosIniciales.remove(num);
 	}
 
