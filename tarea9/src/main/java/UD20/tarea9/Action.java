@@ -41,6 +41,8 @@ public class Action implements ActionListener {
 				primerBoton = null;
 			}
 		}
+
+		juego.hasGanado();
 	}
 
 	public int getContador() {

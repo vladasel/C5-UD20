@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import javax.swing.JToggleButton;
 import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 
@@ -104,5 +106,17 @@ public class Juego_de_memoria extends JFrame {
 		coloresIniciales.add(Color.YELLOW);
 		coloresIniciales.add(Color.PINK);
 		coloresIniciales.add(Color.PINK);
+	}
+
+	void hasGanado() {
+		int contador = 0;
+		for (int i = 0; i < arrayBotones.length; i++) {
+			if (!arrayBotones[i].isVisible()) {
+				contador++;
+			}
+		}
+		if (contador == 16) {
+			JOptionPane.showMessageDialog(null, "Enhorabuena has acabado la partida!!!");
+		}
 	}
 }
