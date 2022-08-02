@@ -28,10 +28,10 @@ public class Juego_de_memoria extends JFrame {
 	private JPanel contentPane;
 	JToggleButton[] arrayBotones;
 	private ArrayList<Color> coloresIniciales;
-	private ArrayList<Image> fotosIniciales;
 
 	Action data = new Action(this);
 	private JTextField textField;
+	Fotos fotos;
 
 	/**
 	 * Create the frame.
@@ -45,7 +45,7 @@ public class Juego_de_memoria extends JFrame {
 		contentPane.setLayout(new GridLayout(4, 4, 0, 0));
 
 		crearArrayColores();
-		crearArrayFotos();
+		fotos.crearArrayFotos();
 		contentPane.setLayout(null);
 
 		JPanel panel_1 = new JPanel();
@@ -75,7 +75,7 @@ public class Juego_de_memoria extends JFrame {
 		for (int i = 0; i < arrayBotones.length; i++) {
 			arrayBotones[i] = new JToggleButton();
 			// colorearBoton(arrayBotones[i]);
-			ponerFoto(arrayBotones[i]);
+			fotos.ponerFoto(arrayBotones[i]);
 			arrayBotones[i].setSelected(true);
 			cartas.add(arrayBotones[i]);
 			arrayBotones[i].addActionListener(data);
@@ -131,37 +131,4 @@ public class Juego_de_memoria extends JFrame {
 		}
 	}
 
-	private void ponerFoto(JToggleButton boton) {
-		int num;
-
-		num = (int) (Math.random() * (fotosIniciales.size()));
-		boton.setIcon(new ImageIcon(fotosIniciales.get(num)));
-		boton.setName(fotosIniciales.get(num).toString());
-		fotosIniciales.remove(num);
-	}
-
-	private void crearArrayFotos() {
-		fotosIniciales = new ArrayList<Image>();
-		try {
-			fotosIniciales.add(ImageIO.read(new FileInputStream("res/alpaca-64.png")));
-			fotosIniciales.add(ImageIO.read(new FileInputStream("res/alpaca-64.png")));
-			fotosIniciales.add(ImageIO.read(new FileInputStream("res/cat-64.png")));
-			fotosIniciales.add(ImageIO.read(new FileInputStream("res/cat-64.png")));
-			fotosIniciales.add(ImageIO.read(new FileInputStream("res/crab-64.png")));
-			fotosIniciales.add(ImageIO.read(new FileInputStream("res/crab-64.png")));
-			fotosIniciales.add(ImageIO.read(new FileInputStream("res/dog-64.png")));
-			fotosIniciales.add(ImageIO.read(new FileInputStream("res/dog-64.png")));
-			fotosIniciales.add(ImageIO.read(new FileInputStream("res/duck-64.png")));
-			fotosIniciales.add(ImageIO.read(new FileInputStream("res/duck-64.png")));
-			fotosIniciales.add(ImageIO.read(new FileInputStream("res/panda-64.png")));
-			fotosIniciales.add(ImageIO.read(new FileInputStream("res/panda-64.png")));
-			fotosIniciales.add(ImageIO.read(new FileInputStream("res/pig-64.png")));
-			fotosIniciales.add(ImageIO.read(new FileInputStream("res/pig-64.png")));
-			fotosIniciales.add(ImageIO.read(new FileInputStream("res/walrus-64.png")));
-			fotosIniciales.add(ImageIO.read(new FileInputStream("res/walrus-64.png")));
-		} catch (IOException ex) {
-			System.out.println(ex);
-		}
-
-	}
 }
