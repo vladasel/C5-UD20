@@ -12,14 +12,16 @@ import javax.swing.JToggleButton;
 import javax.swing.border.LineBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
+import javax.swing.JTextField;
 
 public class Juego_de_memoria extends JFrame {
 
-	private JPanel contentPane;	
+	private JPanel contentPane;
 	JToggleButton[] arrayBotones;
 	private ArrayList<Color> coloresIniciales;
-	
-	Action data = new Action();
+
+	Action data = new Action(this);
+	private JTextField textField;
 
 	/**
 	 * Create the frame.
@@ -31,23 +33,29 @@ public class Juego_de_memoria extends JFrame {
 		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(1, 1, 492, 57);
+		panel_1.setBounds(1, 0, 492, 57);
 		contentPane.add(panel_1);
 		panel_1.setLayout(null);
-		
+
 		JLabel lblNewLabel = new JLabel("Intentos: ");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblNewLabel.setBounds(59, 11, 345, 35);
+		lblNewLabel.setBounds(59, 11, 97, 35);
 		panel_1.add(lblNewLabel);
-		
+
+		textField = new JTextField();
+		textField.setEditable(false);
+		textField.setBounds(148, 19, 45, 19);
+		panel_1.add(textField);
+		textField.setColumns(10);
+
 		JPanel cartas = new JPanel();
 		cartas.setBounds(1, 57, 492, 333);
 		contentPane.add(cartas);
 		cartas.setLayout(new GridLayout(4, 4, 0, 0));
-		
-		crearArrayColores();		
+
+		crearArrayColores();
 
 		// Crear array de togglebuttons
 		arrayBotones = new JToggleButton[16];
@@ -61,16 +69,23 @@ public class Juego_de_memoria extends JFrame {
 		}
 
 	}
-	
+
+	public JTextField getTextField() {
+		return textField;
+	}
+
+	public void setTextField(JTextField textField) {
+		this.textField = textField;
+	}
 
 	private void colorearBoton(JToggleButton boton) {
 		int num;
-		
-		num = (int)(Math.random()*(coloresIniciales.size()));
+
+		num = (int) (Math.random() * (coloresIniciales.size()));
 		boton.setBackground(coloresIniciales.get(num));
 		coloresIniciales.remove(num);
 	}
-	
+
 	private void crearArrayColores() {
 		coloresIniciales = new ArrayList<Color>();
 		coloresIniciales.add(Color.CYAN);

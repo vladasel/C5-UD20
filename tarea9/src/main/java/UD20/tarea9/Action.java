@@ -8,6 +8,8 @@ import javax.swing.JToggleButton;
 public class Action implements ActionListener {
 
 	JToggleButton primerBoton;
+	int contador = 0;
+	Juego_de_memoria juego;
 
 	public void actionPerformed(ActionEvent clickBoton) {
 		// comparar colores --> si son iguales, desactivar botones
@@ -22,7 +24,7 @@ public class Action implements ActionListener {
 			primerBoton = boton;// el boton que clicamos, lo consideramos como primer boton
 		} else {
 			// comprobar primero que no sea el mismo boton para que no se anule a si mismo
-			if (boton != primerBoton) {				
+			if (boton != primerBoton) {
 				// comprobar colores
 				if (primerBoton.getBackground().equals(boton.getBackground())) {
 					primerBoton.setVisible(false);
@@ -30,16 +32,24 @@ public class Action implements ActionListener {
 				} else {
 					primerBoton.setSelected(true);
 					boton.setSelected(true);
+					contador++;// contamos los intentos fallidos
+					juego.getTextField().setText(String.valueOf(contador));
+
 				}
 				primerBoton = null;
-			}else {
+			} else {
 				primerBoton = null;
 			}
 		}
 	}
 
-	public Action() {
+	public int getContador() {
+		return contador;
+	}
+
+	public Action(Juego_de_memoria juego) {
 		primerBoton = null;
+		this.juego = juego;
 	}
 
 }
