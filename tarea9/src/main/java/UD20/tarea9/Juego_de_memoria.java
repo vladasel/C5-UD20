@@ -6,29 +6,46 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JToggleButton;
+import javax.swing.border.LineBorder;
+import javax.swing.JLabel;
+import java.awt.Font;
 
 public class Juego_de_memoria extends JFrame {
 
-	private JPanel contentPane;
-	JToggleButton primerBoton;
+	private JPanel contentPane;	
 	JToggleButton[] arrayBotones;
 	private ArrayList<Color> coloresIniciales;
+	
+	Action data = new Action();
 
 	/**
 	 * Create the frame.
 	 */
 	public Juego_de_memoria() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 507, 438);
 		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
 		setContentPane(contentPane);
-		contentPane.setLayout(new GridLayout(4, 4, 0, 0));
+		contentPane.setLayout(null);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(1, 1, 492, 57);
+		contentPane.add(panel_1);
+		panel_1.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Intentos: ");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNewLabel.setBounds(59, 11, 345, 35);
+		panel_1.add(lblNewLabel);
+		
+		JPanel cartas = new JPanel();
+		cartas.setBounds(1, 57, 492, 333);
+		contentPane.add(cartas);
+		cartas.setLayout(new GridLayout(4, 4, 0, 0));
 		
 		crearArrayColores();		
 
@@ -39,42 +56,13 @@ public class Juego_de_memoria extends JFrame {
 			arrayBotones[i] = new JToggleButton(Integer.toString(i + 1));
 			colorearBoton(arrayBotones[i]);
 			arrayBotones[i].setSelected(true);
-			contentPane.add(arrayBotones[i]);
-			arrayBotones[i].addActionListener(actList);
+			cartas.add(arrayBotones[i]);
+			arrayBotones[i].addActionListener(data);
 		}
 
 	}
 	
-	//crear acccion
-	ActionListener actList = new ActionListener() {
-		public void actionPerformed(ActionEvent clickBoton) {
-			//comparar colores --> si son iguales, desactivar botones
-							//--> si son diferentes, volver a situacion inicial			
-			
-			// objeto tipo toggleButon, se utiliza para sacar el botón que ha lanzado el action
-			JToggleButton boton = (JToggleButton) clickBoton.getSource();// funciona bien solo si todos los botones son
-															// del mismo tipo, en caso de mas tipos de botones, se crearían mas actions
-			
-			
-			if (primerBoton == null) {// si no hay ningún boton "clicado"
-				primerBoton = boton;// el boton que clicamos, lo consideramos como primer boton				
-			} else {				
-				//comprobar primero que no sea el mismo boton para que no se anule a si mismo
-				if(boton!=primerBoton) {
-					// comprobar colores
-					if (primerBoton.getBackground().equals(boton.getBackground())) {
-						primerBoton.setEnabled(false);
-						boton.setEnabled(false);
-					} else {
-						primerBoton.setSelected(true);
-						boton.setSelected(true);						
-					}
-					primerBoton = null;					
-				}				
-			}
-		}
-	};
-	
+
 	private void colorearBoton(JToggleButton boton) {
 		int num;
 		
@@ -102,5 +90,4 @@ public class Juego_de_memoria extends JFrame {
 		coloresIniciales.add(Color.PINK);
 		coloresIniciales.add(Color.PINK);
 	}
-	
 }
