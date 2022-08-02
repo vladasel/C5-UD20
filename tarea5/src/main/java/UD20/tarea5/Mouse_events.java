@@ -34,7 +34,8 @@ public class Mouse_events extends JFrame {
 		JButton btnNewButton = new JButton("Limpiar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				textArea.setText("");
+				text = "";
+				textArea.setText(text);
 			}
 		});
 		btnNewButton.setBounds(136, 12, 117, 25);
