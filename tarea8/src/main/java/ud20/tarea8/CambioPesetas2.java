@@ -82,16 +82,14 @@ public class CambioPesetas2 extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				if( entradaCorrecta(txtCantidad.getText()) ) {
-					
-					String resultado;
+					double resultado;
 					if(cambioAPtas) {
-						resultado = Double.toString(Double.parseDouble(txtCantidad.getText())*CAMBIO_EURO_PTAS);
+						resultado = Double.parseDouble(txtCantidad.getText())*CAMBIO_EURO_PTAS;
 					} else {
-						resultado = Double.toString(Double.parseDouble(txtCantidad.getText())*CAMBIO_PTAS_EURO);
+						resultado = Double.parseDouble(txtCantidad.getText())*CAMBIO_PTAS_EURO;
 					}
-
-					resultado = cortarDecimales(resultado, 3);		//Dejar solo 3 decimales
-					txtResultado.setText(resultado);
+					//Dejar solo 3 decimales
+					txtResultado.setText(String.format("%.3f", resultado));;
 					
 				} else {
 					JOptionPane.showMessageDialog(CambioPesetas2.this, "Error: Introducir solo caracteres validos.");
@@ -117,6 +115,9 @@ public class CambioPesetas2 extends JFrame {
 	}
 	
 	private boolean entradaCorrecta (String texto) {
+		if(texto.equals("")) {
+			return false;
+		} 
 		String charsAceptados = "1234567890.";
 		int numPuntos = 0;
 		
@@ -134,12 +135,6 @@ public class CambioPesetas2 extends JFrame {
 		
 		return true;
 		
-	}
+	}	
 	
-	private String cortarDecimales(String numero, int decimales) {
-		if(numero.length() > numero.indexOf(".")+decimales+1) {
-			numero = numero.substring(0, numero.indexOf(".")+decimales+1);
-		}
-		return numero;
-	}
 }
