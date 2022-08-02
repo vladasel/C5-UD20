@@ -1,20 +1,8 @@
 package ud20.tareas;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-import java.awt.GridLayout;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
 import javax.swing.JLabel;
-import java.awt.Cursor;
-import javax.swing.SwingConstants;
-import java.awt.Component;
-import java.awt.SystemColor;
 
 public class ex1 extends JFrame {
 
