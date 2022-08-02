@@ -26,7 +26,7 @@ public class Action implements ActionListener {
 			// comprobar primero que no sea el mismo boton para que no se anule a si mismo
 			if (boton != primerBoton) {
 				// comprobar colores
-				if (primerBoton.getBackground().equals(boton.getBackground())) {
+				if (primerBoton.getIcon() == (boton.getIcon())) {
 					primerBoton.setVisible(false);
 					boton.setVisible(false);
 				} else {
