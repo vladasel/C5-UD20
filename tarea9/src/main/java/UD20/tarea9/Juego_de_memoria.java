@@ -43,8 +43,8 @@ public class Juego_de_memoria extends JFrame {
 		contentPane.setBorder(new LineBorder(new Color(0, 0, 0)));
 		setContentPane(contentPane);
 		contentPane.setLayout(new GridLayout(4, 4, 0, 0));
-		
-		crearArrayColores();		
+
+		crearArrayColores();
 		crearArrayFotos();
 		contentPane.setLayout(null);
 
@@ -74,7 +74,7 @@ public class Juego_de_memoria extends JFrame {
 		// rellenar el array
 		for (int i = 0; i < arrayBotones.length; i++) {
 			arrayBotones[i] = new JToggleButton();
-			//colorearBoton(arrayBotones[i]);
+			// colorearBoton(arrayBotones[i]);
 			ponerFoto(arrayBotones[i]);
 			arrayBotones[i].setSelected(true);
 			cartas.add(arrayBotones[i]);
@@ -118,7 +118,6 @@ public class Juego_de_memoria extends JFrame {
 		coloresIniciales.add(Color.PINK);
 		coloresIniciales.add(Color.PINK);
 	}
-<<<<<<< HEAD
 
 	void hasGanado() {
 		int contador = 0;
@@ -130,38 +129,38 @@ public class Juego_de_memoria extends JFrame {
 		if (contador == 16) {
 			JOptionPane.showMessageDialog(null, "Enhorabuena has acabado la partida!!!");
 		}
-=======
-	
+	}
+
 	private void ponerFoto(JToggleButton boton) {
 		int num;
-		
-		num = (int)(Math.random()*(fotosIniciales.size()));
+
+		num = (int) (Math.random() * (fotosIniciales.size()));
 		boton.setIcon(new ImageIcon(fotosIniciales.get(num)));
 		fotosIniciales.remove(num);
 	}
-	
+
 	private void crearArrayFotos() {
 		fotosIniciales = new ArrayList<Image>();
 		try {
-			fotosIniciales.add( ImageIO.read( new FileInputStream("res/alpaca-64.png") ) );
-			fotosIniciales.add( ImageIO.read( new FileInputStream( "res/alpaca-64.png" ) ) );
-			fotosIniciales.add( ImageIO.read( new FileInputStream( "res/cat-64.png" ) ) );
-			fotosIniciales.add( ImageIO.read( new FileInputStream( "res/cat-64.png" ) ) );
-			fotosIniciales.add( ImageIO.read( new FileInputStream( "res/crab-64.png" ) ) );
-			fotosIniciales.add( ImageIO.read( new FileInputStream( "res/crab-64.png" ) ) );
-			fotosIniciales.add( ImageIO.read( new FileInputStream( "res/dog-64.png" ) ) );
-			fotosIniciales.add( ImageIO.read( new FileInputStream( "res/dog-64.png" ) ) );
-			fotosIniciales.add( ImageIO.read( new FileInputStream( "res/duck-64.png" ) ) );
-			fotosIniciales.add( ImageIO.read( new FileInputStream( "res/duck-64.png" ) ) );
-			fotosIniciales.add( ImageIO.read( new FileInputStream( "res/panda-64.png" ) ) );
-			fotosIniciales.add( ImageIO.read( new FileInputStream( "res/panda-64.png" ) ) );
-			fotosIniciales.add( ImageIO.read( new FileInputStream( "res/pig-64.png" ) ) );
-			fotosIniciales.add( ImageIO.read( new FileInputStream( "res/pig-64.png" ) ) );
-			fotosIniciales.add( ImageIO.read( new FileInputStream( "res/walrus-64.png" ) ) );
-			fotosIniciales.add( ImageIO.read( new FileInputStream( "res/walrus-64.png" ) ) );
-		  } catch (IOException ex) {
-		    System.out.println(ex);
-		  }
->>>>>>> 888a4fa44b6d62c7e2aa0658926fc822b8d1577e
+			fotosIniciales.add(ImageIO.read(new FileInputStream("res/alpaca-64.png")));
+			fotosIniciales.add(ImageIO.read(new FileInputStream("res/alpaca-64.png")));
+			fotosIniciales.add(ImageIO.read(new FileInputStream("res/cat-64.png")));
+			fotosIniciales.add(ImageIO.read(new FileInputStream("res/cat-64.png")));
+			fotosIniciales.add(ImageIO.read(new FileInputStream("res/crab-64.png")));
+			fotosIniciales.add(ImageIO.read(new FileInputStream("res/crab-64.png")));
+			fotosIniciales.add(ImageIO.read(new FileInputStream("res/dog-64.png")));
+			fotosIniciales.add(ImageIO.read(new FileInputStream("res/dog-64.png")));
+			fotosIniciales.add(ImageIO.read(new FileInputStream("res/duck-64.png")));
+			fotosIniciales.add(ImageIO.read(new FileInputStream("res/duck-64.png")));
+			fotosIniciales.add(ImageIO.read(new FileInputStream("res/panda-64.png")));
+			fotosIniciales.add(ImageIO.read(new FileInputStream("res/panda-64.png")));
+			fotosIniciales.add(ImageIO.read(new FileInputStream("res/pig-64.png")));
+			fotosIniciales.add(ImageIO.read(new FileInputStream("res/pig-64.png")));
+			fotosIniciales.add(ImageIO.read(new FileInputStream("res/walrus-64.png")));
+			fotosIniciales.add(ImageIO.read(new FileInputStream("res/walrus-64.png")));
+		} catch (IOException ex) {
+			System.out.println(ex);
+		}
+
 	}
 }
