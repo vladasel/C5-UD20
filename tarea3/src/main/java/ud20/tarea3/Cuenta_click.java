@@ -50,7 +50,7 @@ public class Cuenta_click extends JFrame {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				contador2++;
-				txtClickBoton_1.setText("Clicks boton1: " + contador2);
+				txtClickBoton_1.setText("Clicks boton2: " + contador2);
 			}
 		});
 		btnNewButton_1.setBounds(236, 96, 117, 25); // situar el boton
